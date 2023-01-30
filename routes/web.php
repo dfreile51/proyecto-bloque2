@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +18,10 @@ use App\Http\Controllers\MainController;
 
 Route::get('/', [MainController::class, 'inicio'])->name('inicio');
 
-Route::get('/inventario', [MainController::class, 'inventario'])->name('inventario');
-
 Route::get('/contacto', [MainController::class, 'contacto'])->name('contacto');
 
 Route::get('/trabaja', [MainController::class, 'trabaja'])->name('trabaja');
+
+Route::resource('discos', 'App\Http\Controllers\DiscoController');
+
+Auth::routes();

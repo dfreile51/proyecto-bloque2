@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('discos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('role',['user','admin'])->default('user');
-            $table->rememberToken();
+            $table->string('nombre', 30)->unique();
+            $table->string('artista', 30);
+            $table->string('formato', 30);
+            $table->string('pais', 30);
+            $table->date('fecha');
+            $table->string('genero', 30);
+            $table->integer('precio')->unsigned();
+            $table->string('imagen', 100);
             $table->timestamps();
         });
     }
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('discos');
     }
 };
