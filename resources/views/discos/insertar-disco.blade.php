@@ -3,19 +3,19 @@
     <div class="container my-3">
         <div class="row">
             <div class="col-12">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li><strong>{{ $error }}</strong></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card">
                     <div class="d-flex justify-content-center card-header">
                         <h3 class="card-title">Agregar Disco a la Base de Datos</h3>
                     </div>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li><strong>{{ $error }}</strong></li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                     <div class="card body p-4">
                         <form action="{{ route('discos.store') }}" method="post" enctype="multipart/form-data">
                             @csrf

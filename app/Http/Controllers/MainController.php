@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -12,7 +13,13 @@ class MainController extends Controller
     }
 
     public function inicio() {
-        return view('inicio')->with(['nombre' => 'Inicio']);
+        $consulta = "SELECT * FROM discos ORDER BY RAND() LIMIT 3";
+        $discos = DB::select($consulta);
+        return view('inicio')->with([
+            'nombre' => 'Inicio',
+            'discos' => $discos
+        ]);
+        // return view('inicio')->with(['nombre' => 'Inicio']);
     }
 
     public function contacto() {

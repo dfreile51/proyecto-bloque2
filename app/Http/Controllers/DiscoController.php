@@ -11,6 +11,7 @@ class DiscoController extends Controller
     public function __construct() {
         $this->middleware(['auth','admin'])->except(['index', 'show']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -95,7 +96,10 @@ class DiscoController extends Controller
      */
     public function show(Disco $disco)
     {
-        //
+        return view('discos.mostrar-disco')->with([
+            'nombre' => $disco->nombre,
+            'disco' => $disco
+        ]);
     }
 
     /**
@@ -171,12 +175,7 @@ class DiscoController extends Controller
      */
     public function destroy(Disco $disco)
     {
-        $nombre = $disco->nombre;
         $disco->delete();
-        return view('discos.guardado')->with([
-            'nombre' => 'Disco eliminado',
-            'operacion' => 'eliminado',
-            'disco' => $nombre
-        ]);
+        return back()->with('success', "Disco eliminado con éxito.");
     }
 }
